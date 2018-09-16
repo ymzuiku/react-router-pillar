@@ -112,7 +112,7 @@ NaviRoute = class extends React.PureComponent {
             style={{
               width: '100%',
               height: '100%',
-              position: 'absolute',
+              position: 'fixed',
               backgroundColor: this.props.backgroundColor,
               zIndex: this.state.index * 10,
               transform: sp.transform,
