@@ -68,7 +68,7 @@ function hashChange() {
           history.goBack();
         }
       }
-      history.push(pathname);
+      history.push(pathname, { noAnime: true });
     }
   } catch (err) {
     // err

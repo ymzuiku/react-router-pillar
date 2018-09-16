@@ -20,6 +20,7 @@ NaviRoute = class extends React.PureComponent {
   static defaultProps = { ...IProps };
   listen = 0;
   state = {
+    isImmediate: false,
     nowRoute: false,
     onAnime: false,
     index: this.props.root ? 1 : 0,
@@ -47,6 +48,7 @@ NaviRoute = class extends React.PureComponent {
       // 新页面从右边推到中间
       this.setState({
         isNearPage,
+        isImmediate: h.location.state ? h.location.state.noAnime : false,
         onAnime: true,
         nowRoute: true,
         index: 1,
@@ -57,6 +59,7 @@ NaviRoute = class extends React.PureComponent {
       // 当前页面从中间推到右边
       this.setState({
         isNearPage,
+        isImmediate: h.location.state ? h.location.state.noAnime : false,
         onAnime: true,
         nowRoute: false,
         index: 0,
@@ -67,6 +70,7 @@ NaviRoute = class extends React.PureComponent {
       // 当前页面中间推到左边
       this.setState({
         isNearPage,
+        isImmediate: h.location.state ? h.location.state.noAnime : false,
         onAnime: true,
         nowRoute: false,
         index: 0,
@@ -88,6 +92,8 @@ NaviRoute = class extends React.PureComponent {
     return (
       <Spring
         onRest={this.onRest}
+        native
+        isImmediate={this.state.isImmediate}
         config={{
           tension: 190,
           friction: 23,
@@ -95,7 +101,6 @@ NaviRoute = class extends React.PureComponent {
           restDisplacementThreshold: 0.002,
           restSpeedThreshold: 0.002,
         }}
-        native
         from={{
           transform: `perspective(600px) translate3d(${
             this.state.moveAnimeA
